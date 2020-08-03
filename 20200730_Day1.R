@@ -182,7 +182,7 @@ nrow(mat5)
 ncol(mat5)
 
 #apply 행렬에 단위 연산을 지원하는 함수
-
+%>% 
 m <- matrix(1:9,ncol=3,byrow = T)
 m
 apply(m,1,max) #행별 최대값
