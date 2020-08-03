@@ -309,34 +309,36 @@ buildDictionary(ext_dic=c('woorimalsam','sejong'),
                 replace_usr_dic = F)
 
 #인터넷에서 파일 바로 불러오기
+#실습 GDP 상위 20개 barplot 그리기
+#key-point
+ +1. GDP_ranking 상위 5개 행은 값이 없다. 즉, 제거해야한다.
+ +2. Chr 자료형인 GDP를 numeric으로 바꿔야 한다. 즉, y축의 범위는 연속형이여야 하기 때문이다.
+ +3. 위의 과정을 수행한 뒤, barplot을 그려야 한다.
+
 GDP_ranking =read.csv(file = 'http://databank.worldbank.org/data/download/GDP_PPP.csv',
                       encoding = 'UTF-8')
 
 head(GDP_ranking, 20)
 
 summary(GDP_ranking)
-library(ggplot2)
 
-install.packages("stringr")
+install.packages("stringr") #문자열을 쉽게 처리할 수 있는 패키지 ;;  여기서는 필요 없음
 library(stringr)
-ranking_GDP <- GDP_rank[-c(1:5), c(1, 2, 4, 5)]
-ranking_GDP
-View(ranking_GDP)
+ranking_GDP <- GDP_ranking[-c(1:5), c(1, 2, 4, 5)] # GDP_ranking의 1:5 행을 제거 및 1,2,4,5를 추출하여 ranking_GDP로 넣는다.
+# head(ranking_GDP,3)
+# View(ranking_GDP)
 
-GDP_ranking$X.3 <- gsub(',', "", GDP_ranking$X.3)
-GDP_ranking$X.3 <- as.numeric(GDP_ranking$X.3)
-GDP_ranking$X.3 <- GDP_ranking$X.3/1000
-GDP_ranking$X.3
-GDP_ranking[5]
-GDP_ranking
-str(GDP_ranking)
-barplot(GDP_ranking[6:25,5], names.arg = GDP_ranking$X.2[6:25], 
+ranking_GDP$X.3 <- gsub(',', "", ranking_GDP$X.3) #Chr 자료형인 X.3열(GDP수치)에서 ','를 공백으로 바꾸는 것
+ranking_GDP$X.3 <- as.numeric(ranking_GDP$X.3) #Chr 자료형인 X.3열을 numeric 자료형으로 변환
+ranking_GDP$X.3 <- ranking_GDP$X.3/1000 #Y축과 범위를 맞취기 위해 1000으로 나눔
+#ranking_GDP$X.3
+#ranking_GDP[4]
+#ranking_GDP
+#str(ranking_GDP)
+barplot(ranking_GDP$X.3[1:20], names.arg = ranking_GDP$X.2[1:20], 
         col=rainbow(21), xlab ='Nations', ylab='unit($Billion)',
         ylim =  c(0,25000),
         main = '2018년 국가별 GDP 순위(상위 20개국)')
-
-
-gd
 
 
 
