@@ -232,6 +232,8 @@ f_plus(3,5)
 #   cat('**')
 # }
 
+  
+##푼것  
 f_mul <- function(x,y){
   mul = x*y
   return(mul)
@@ -245,6 +247,7 @@ for(i in 2:9){
   }
 }
 
+##강사님
 gugudan <- function(i){
   for(x in 2:i){
     cat('**',x,'단','**','\n')
@@ -324,7 +327,7 @@ summary(GDP_ranking)
 
 install.packages("stringr") #문자열을 쉽게 처리할 수 있는 패키지 ;;  여기서는 필요 없음
 library(stringr)
-ranking_GDP <- GDP_ranking[-c(1:5), c(1, 2, 4, 5)] # GDP_ranking의 1:5 행을 제거 및 1,2,4,5를 추출하여 ranking_GDP로 넣는다.
+ranking_GDP <- GDP_ranking[-c(1:5), c(1, 2, 4, 5)] # GDP_ranking의 1:5 행을 제거 및 1,2,4,5 열을을 추출하여 ranking_GDP로 넣는다.
 # head(ranking_GDP,3)
 # View(ranking_GDP)
 
