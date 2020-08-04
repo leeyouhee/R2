@@ -236,7 +236,7 @@ library(stringr)
 
 cal_sal <-function(EMP){
   #로직
-  #year <- str_extract(EMP,'[0-9]{1,}$')
+  #year <- str_extract(EMP,'[0-9]{1,}$') #anchor
   EMP_year <- str_extract(EMP,'[0-9]{4}')
   str_extract_all(EMP,'[가-힣]{1,}')
   EMP_name <- unlist(str_extract_all(EMP,'[가-힣]{1,}'))
@@ -299,6 +299,129 @@ mons <- function(n){
   return(prob)
 }
 mons(99999)
+
+####################################강사님 풀이###############################
+1.
+
+​
+
+name <- c("유관순","홍길동","이순신","신사임당")
+
+gender <- c("F","M","M","F")
+
+price <- c(50,65,45,75)
+
+​
+
+# 데이터 프레임 생성
+
+client <- data.frame(NAME=name,GENDER=gender,PRICE=price)
+
+client
+
+​
+
+# 조건2 처리
+
+result <- ifelse(client$PRICE>=65,"Best","Normal")
+
+result
+
+​
+
+# 조건3
+
+table(result)
+
+​
+
+2. EMP_df <- function(x){
+  
+  library(stringr)
+  
+  EMP1 <- str_extract_all(x,"[가-힣]{1,}[0-9]{1,}")
+  
+  name <- str_extract_all(EMP1,"[가-힣]{1,}")
+  
+  name <- unlist(name)
+  
+  sal <- str_extract_all(EMP1,"[0-9]{1,}")
+  
+  sal <- unlist(sal)
+  
+  EMP0 <- data.frame(name, sal, stringsAsFactors = FALSE)
+  
+  EMP0$sal <- as.numeric(EMP0$sal)
+  
+  ​
+  
+  cat('전체 급여 평균:', mean(EMP0$sal),'\n')
+  
+  cat('평균 이상 급여 수령자','\n')
+  
+  ​
+  
+  for(i in 1:length(EMP0$sal)){
+    
+    if(EMP0$sal[i] >= mean(EMP0$sal)){
+      
+      cat(EMP0$name[i],'=>',EMP0$sal[i],'\n')
+      
+    }
+    
+  }
+  
+}
+
+​
+
+EMP_df(EMP)
+
+​
+
+3.
+
+​
+
+f <- function(x){
+  
+  x <- x^3+4
+  
+}
+
+​
+
+mrc <- function(a,b){
+  
+  result <- (f(b)-f(a))/(b - a)
+  
+  print(paste('평균변화율=',result))
+  
+}
+
+​
+
+mrc(1,3)
+
+​
+
+4.
+
+​
+
+mon <- function(n){
+  
+  a <- runif(n)
+  
+  b <- ifelse(a<0.5, 0, 1)
+  
+  cnt <- sum(b)
+  
+  p <- cnt/n
+  
+  return(p)
+  
+}
 
 
 
