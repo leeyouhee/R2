@@ -65,7 +65,7 @@ View(s_data)
 ss <- s_data %>% select(상권업종대분류명)
 table(ss)
 sss <- s_data %>% 
-  filter(상권업종대분류명 == '스포츠')
+  filter(상권업종대분류명 == '음식')
 View(sss)
 
 
