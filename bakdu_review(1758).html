@@ -1,0 +1,1065 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>네이버 영화</title>
+
+
+
+	
+	
+	
+	
+		<link rel="shortcut icon" href="https://ssl.pstatic.net/static/m/movie/icons/naver_movie_favicon.ico" type="image/x-icon">
+			
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/common.css?20200806170632" />
+
+<link rel="stylesheet" type="text/css" href="/css/movie_tablet.css?20200806170632" />
+<link rel="stylesheet" type="text/css" href="/css/movie_end.css?20200806170632" />
+
+
+
+
+<script type="text/javascript" src="/js/deploy/movie.all.js?20200806170632"></script>
+
+
+
+</head>
+<body>
+	<!-- content -->
+<input type="hidden" name="movieCode" id="movieCode" value="187940"/>
+<input type="hidden" name="onlyActualPointYn" id="onlyActualPointYn" value="N"/>
+<input type="hidden" name="includeSpoilerYn" id="includeSpoilerYn" value="N"/>
+<input type="hidden" name="order" id="order" value="sympathyScore"/>
+<input type="hidden" name="page" id="page" value="1758"/>
+<div class="ifr_area basic_ifr">
+	<div class="input_netizen ">
+		
+			
+			
+			
+		
+				<!-- [D] 관람객 평점 작성 완료 -->
+                <div id="actualPointWriteExecuteLayer" class="ly_viewer" style="display:none">
+                        <h4>관람객 평점 작성 완료 안내</h4>
+                        <p>관람객 평점이 등록되었습니다.<br><em>네이버페이 포인트 500원</em>이 적립되었습니다.<br><em>7일 이후</em> 확인 가능합니다.</p>
+                        <p>(평점 삭제시, 적립된 포인트는 회수됩니다.)</p>
+                        <div class="btn">
+                                <a href="#" id="actualPointWriteExecuteLayerOkButton" class="ok">확인</a>
+                                <a href="#" id="actualPointWriteExecuteLayerCloseButton" class="close" title="닫기">관람객 평점 작성 완료 안내 레이어 닫기</a>
+                        </div>
+                </div>
+                <!-- //관람객 평점 작성 완료 -->
+                
+                <!-- [D] 관람객 평점 작성 완료2 -->
+                <div id="pointWriteExecuteLayer" class="ly_viewer" style="display:none">
+                        <h4>관람객 평점 작성 완료 안내</h4>
+                        <p class="msg1">관람객 평점이 등록되었습니다.</p>
+                        <div class="btn">
+                                <a href="#" id="pointWriteExecuteLayerOkButton" class="ok">확인</a>
+                                <a href="#" id="pointWriteExecuteLayerCloseButton" class="close" title="닫기">관람객 평점 작성 완료 안내 레이어 닫기</a>
+                        </div>
+                </div>
+                <!-- //관람객 평점 작성 완료2 -->
+				
+				<div class="score_total">
+					<strong class="total">관람객 평점 <em>30,288</em>건<button id="open-form-btn" class="btn_review">내 평점 등록</button></strong>
+				</div>
+				
+				<div id="orderCheckbox" class="top_behavior">
+					<ul class="sorting_list">
+						<li class='on'><a href="#" onclick="parent.clickcr(this, 'ara.bysym', '', '', event); dislplayOrder('sympathyScore');">공감순</a></li>
+						<li><a href="#" onclick="parent.clickcr(this, 'ara.byrct', '', '', event); dislplayOrder('newest');">최신순</a></li>
+						
+							<li><a href="#" onclick="parent.clickcr(this, 'ara.high', '', '', event); dislplayOrder('highest');">평점 높은 순</a></li>
+							<li><a href="#" onclick="parent.clickcr(this, 'ara.low', '', '', event); dislplayOrder('lowest');">평점 낮은 순</a></li>
+						
+					</ul>
+					
+						<ul class="quarter_mode">
+							<li>
+								<input type="checkbox" id="spoilerYnCheckBox" name="spilerViewer" class="blind " title="스포일러 보기" onclick="parent.clickcr(this,'','','',event); return false;"  />
+								<label for="spoilerYnCheckBox" id="spoilerYnLable" class="label_viewer">스포일러 보기</label>
+							</li>
+							<li>
+								<input type="checkbox" id="actualYnCheckBox" name="viewer" title="관람객 평점만 보기" class="blind "onclick="parent.clickcr(this,'ura.mgs','','',event); return false;"  />
+								<label for="actualYnCheckBox" id="actualYnLable" class="label_viewer">관람객 평점만 보기</label>
+								<a href="#" id="actualPointHelpButton" class="help _actualPointHelp" title="도움말">관람객 평점만 보기 도움말</a>
+								<div id="actualPointHelp" class="ly_help _actualPointHelp" style="display:none">
+									<h5>관람객평점만 보기 안내 레이어</h5>
+									<div class="ly_cont _actualPointHelp">
+										<p>네이버 영화에서 예매하신 고객님들이<br> 영화 관람 후 등록해주신 평점입니다.</p>
+									</div>
+									<button type="button" id="actualPointHelpCloseButton" class="btn_close _actualPointHelp" title="닫기"><span class="blind">관람객 평점만 보기 안내 레이어 닫기</span></button>
+									<span class="arr _actualPointHelp"></span>
+                                </div>
+							</li>
+						</ul>
+					
+				</div>
+		
+				
+				
+					
+					
+						<div class="score_result">
+							<ul>
+								
+								
+								
+									
+								
+								
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:100.0%"></span></span><em>10</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_0">
+														
+															
+															
+																재난 영화임에도 유머가 있어 좋았다 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16518245, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>타임포키즈(wasa****)</span>
+															</a>
+														</em>
+														<em>2019.12.22 17:17</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','wasa****', '60qq+Fk8upLd5CuvsZPasG+Nc48WRTkaUci+0NbBRg0=', '재난 영화임에도 유머가 있어 좋았다 ', '16518245', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16518245">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16518245">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:100.0%"></span></span><em>10</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_1">
+														
+															
+															
+																이렇게 나는 하정우 덕후가 되어가고.. 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16517819, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>설빙(mkyn****)</span>
+															</a>
+														</em>
+														<em>2019.12.22 16:01</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','mkyn****', 'hZEFIFNqgkvZx58s0iFNDF++8GKcDHq0geLphyFzGfc=', '이렇게 나는 하정우 덕후가 되어가고.. ', '16517819', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16517819">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16517819">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:10.0%"></span></span><em>1</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_2">
+														
+															
+															
+																제작을 김정은이 함? 진짜 이딴영화나 쳐만들고있으니 북한이 툭하면 도발하지.동맹국은 이따위로 묘사하고.참. 김정은한테 헌정하려 만들었나보네요 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16516543, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>제이드린(rrin****)</span>
+															</a>
+														</em>
+														<em>2019.12.22 11:56</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','rrin****', 'zMlZsbjeDq8m/E90RA2yjZjx4yol9rrfwxPZUhwO6x0=', '제작을 김정은이 함? 진짜 이딴영화나 쳐만들고있으니 북한이 툭하면 도발하지.동맹국은 이따위로 묘사하고.참. 김정은한테 헌정하려 만들었나보네요 ', '16516543', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16516543">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16516543">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:20.0%"></span></span><em>2</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_3">
+														
+															
+																<span id="_unfold_ment3" class="_unfold_ment">
+																	<a href="javascript:void(0);" data-src="진짜 관람객이고요 이병헌 하정우 너무 좋아해서 개봉하자마자 봤어요. 정말 평점 낮게 주게되서 우선 배우님들께 죄송하고요 뭐 스토리나 연기나 그런걸 탓하기 전에 영화가 어디에 중점을 둔건지 재난인지 전투인지 개그인지...어느 한 씬에 몰입이 될려 하면 갑자기 개그치고, 뭔가 편집이 좀 아쉽고, 너무 예측 가능한 전개에 약간 실소도 나오고 했어요. 그치만 배우님들 수고 많으셨어요~ " onclick="unfoldPointMent(this);">
+																		진짜 관람객이고요 이병헌 하정우 너무 좋아해서 개봉하자마자 봤어요. 정말 평점 낮게 주게되서 우선 배우님들께 죄송하고요 뭐 스토리나 연기나 그런걸 탓하기 전에 영화가 어디에 중점을 둔건지 재난인지 전투인지 개그인지....
+																	</a>
+																</span>
+															
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16497910, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>05cc****</span>
+															</a>
+														</em>
+														<em>2019.12.19 12:52</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','05cc****', 'WQMisiHvYSNQGfQg0IPG6PZKhVEuTOxZDAoRDwrorvw=', '진짜 관람객이고요 이병헌 하정우 너무 좋아해서 개봉하자마자 봤어요. 정말 평점 낮게 주게되서 우선 배우님들께 죄송하고요 뭐 스토리나 연기나 그런걸 탓하기 전에 영화가 어디에 중점을 둔건지 재난인지 전투인지 개그인지...어느 한 씬에 몰입이 될려 하면 갑자기 개그치고, 뭔가 편집이 좀 아쉽고, 너무 예측 가능한 전개에 약간 실소도 나오고 했어요. 그치만 배우님들 수고 많으셨어요~ ', '16497910', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16497910">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16497910">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:20.0%"></span></span><em>2</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_4">
+														
+															
+															
+																어제 시사회로 보고 왔습니다.너무 뻔한 스토리, 엉성한 연출, 억지 신파,과한 코믹요소... 군데군데 어색한cg ㅠㅠ배우들의 연기 빼고는 모두 실망했습니다 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16497899, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>운좋은(kang****)</span>
+															</a>
+														</em>
+														<em>2019.12.19 12:49</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','kang****', 'zbQOovOG94evcR/jZIgxTvPXfhmLWWxtwdAVdvx39Kw=', '어제 시사회로 보고 왔습니다.너무 뻔한 스토리, 엉성한 연출, 억지 신파,과한 코믹요소... 군데군데 어색한cg ㅠㅠ배우들의 연기 빼고는 모두 실망했습니다 ', '16497899', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16497899">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16497899">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:10.0%"></span></span><em>1</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_5">
+														
+															
+															
+																알바들진짜 극혐 평점부터 쓰고 영화를 보는거냐 아님 마음속에서만 보는거냐 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16497585, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>아가리파이터(youm****)</span>
+															</a>
+														</em>
+														<em>2019.12.19 11:51</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','youm****', '3XqBlmt6uoAdEctMe156WohkGLOWPCyKCpSxCoxlvOA=', '알바들진짜 극혐 평점부터 쓰고 영화를 보는거냐 아님 마음속에서만 보는거냐 ', '16497585', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16497585">11</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16497585">11</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:100.0%"></span></span><em>10</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_6">
+														
+															
+															
+																이병헌 배우의 연기력이 감탄했습니다 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16561208, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>dora****</span>
+															</a>
+														</em>
+														<em>2019.12.30 14:13</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','dora****', 'oj474LZpIzV4qRZX4+4yyMqIAaWEpfidy+YS73ueqcE=', '이병헌 배우의 연기력이 감탄했습니다 ', '16561208', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16561208">12</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16561208">12</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:80.0%"></span></span><em>8</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_7">
+														
+															
+															
+																하도 혹평이길래기대안하고봤는데볼만했어요이병헌님카리스마 짱입니당 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16552495, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>풀잎내음(xxx0****)</span>
+															</a>
+														</em>
+														<em>2019.12.28 19:35</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','xxx0****', 'd4pxQouEmmujzl7mk0xQ/7avGDu+z3JRhoQX3Jk2m9g=', '하도 혹평이길래기대안하고봤는데볼만했어요이병헌님카리스마 짱입니당 ', '16552495', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16552495">12</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16552495">12</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:100.0%"></span></span><em>10</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_8">
+														
+															
+															
+																감정선의 흐름이 자연스럽고 몰입이 잘됐다 배우들의 역할이 더없이 만족스러웠다 오랜만에 만족스러운 한국영화를 볼 수 있어서 행복한 시간이었다 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16534337, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>qsis(admd****)</span>
+															</a>
+														</em>
+														<em>2019.12.25 17:35</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','admd****', '5DVC0xw0E0Nc4HPYvDDQuO3uU8AowbEirS9Py21fMA8=', '감정선의 흐름이 자연스럽고 몰입이 잘됐다 배우들의 역할이 더없이 만족스러웠다 오랜만에 만족스러운 한국영화를 볼 수 있어서 행복한 시간이었다 ', '16534337', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16534337">12</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16534337">12</strong>
+												</a>
+											</div>
+										</li>
+									
+										
+										
+										<li class='last'>
+											<div class="star_score">
+												
+													<span class="st_off"><span class="st_on" style="width:80.0%"></span></span><em>8</em>
+												
+											</div>
+											<div class="score_reple">
+												<p>
+													<span class="ico_viewer">관람객</span>
+													<!-- 스포일러 컨텐츠로 처리되는지 여부 -->
+													
+													
+													
+													<span id="_filtered_ment_9">
+														
+															
+															
+																오늘 백두산 보고 왔어요스케일이며 나오는 배우모두 너무 멋졌어요마지막 이병헌 때문에 눈물한방울 흘렸네요 
+															
+														
+														
+													</span>
+												</p>
+												<dl>
+													<dt>
+														<em>
+															<a href="#" onclick="javascript:showPointListByNid(16528962, 'after');parent.clickcr(this, 'ara.uid', '', '', event); return false;" target="_top">
+																<span>지니공주(xotn****)</span>
+															</a>
+														</em>
+														<em>2019.12.24 22:17</em>
+													</dt>
+													<dd>
+														
+															
+															
+																<a href="#" onclick="parent.clickcr(this, 'ara.report', '', '', event); common.report('false','xotn****', 'Sjmx0EGXsxMIGxf3GfEvktdAnqqyn0/P7W3qU3kAeI4=', '오늘 백두산 보고 왔어요스케일이며 나오는 배우모두 너무 멋졌어요마지막 이병헌 때문에 눈물한방울 흘렸네요 ', '16528962', 'point_after', false);return false;" class="go_report2"><em>신고</em></a>
+															
+														
+													</dd>
+												</dl>
+											</div>
+											<div class="btn_area">
+												<a class="_sympathyButton" href="#" onclick="parent.clickcr(this, 'ara.sym', '', '', event);">
+													<span class="ico_up"></span>
+													<span class="blind">공감</span>
+													<strong class="sympathy_16528962">12</strong>
+												</a>
+												<a class="_notSympathyButton" href="#" onclick="parent.clickcr(this, 'ara.opp', '', '', event);">
+													<span class="ico_down"></span>
+													<span class="blind">비공감</span>
+													<strong class="notSympathy_16528962">12</strong>
+												</a>
+											</div>
+										</li>
+									
+								
+								
+							</ul>
+						</div>
+						<div class="paging">
+							<div>
+							
+								<a id="pagerTagAnchor1757" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1757" title="이전" class="pg_prev" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><em>이전</em></a>
+
+								<a id="pagerTagAnchor1753" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1753" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,753</span></a>
+<a id="pagerTagAnchor1754" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1754" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,754</span></a>
+<a id="pagerTagAnchor1755" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1755" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,755</span></a>
+<a id="pagerTagAnchor1756" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1756" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,756</span></a>
+<a id="pagerTagAnchor1757" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1757" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,757</span></a>
+<a id="pagerTagAnchor1758" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1758" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span class="on">1,758</span></a>
+<a id="pagerTagAnchor1759" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1759" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,759</span></a>
+<a id="pagerTagAnchor1760" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1760" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,760</span></a>
+<a id="pagerTagAnchor1761" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1761" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,761</span></a>
+<a id="pagerTagAnchor1762" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1762" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><span>1,762</span></a>
+
+								<a id="pagerTagAnchor1759" href="/movie/bi/mi/pointWriteFormList.nhn?code=187940&amp;type=after&amp;isActualPointWriteExecute=false&amp;isMileageSubscriptionAlready=false&amp;isMileageSubscriptionReject=false&amp;page=1759" title="다음" class="pg_next" onclick="parent.clickcr(this, 'ara.page', '', '', event);"><em>다음</em></a>
+
+													
+							</div>
+						</div>
+					
+				
+			
+		
+	</div>
+</div>
+<!-- //content -->
+<form id="reportForm" name="reportForm1" method="POST" accept-charset="euc-kr"></form>
+<script type="text/javascript">
+
+
+if (false == false && "after" == "after" && false) {
+	if (true && false) {
+		jindo.$Element("pointWriteExecuteLayer").show();
+	} else if (false && true) {
+		jindo.$Element("actualPointWriteExecuteLayer").show();
+	}
+}
+
+var oElActualPointWriteExecuteLayer = jindo.$Element("actualPointWriteExecuteLayer");
+
+if (oElActualPointWriteExecuteLayer != null && oElActualPointWriteExecuteLayer != "undefined") {
+
+	
+	jindo.$Element("actualPointWriteExecuteLayerOkButton").attach("click", function(e){
+		e.stop(jindo.$Event.CANCEL_DEFAULT);
+		jindo.$Element("actualPointWriteExecuteLayer").hide();
+		refreshPage();
+	});
+	
+	
+	
+	jindo.$Element("actualPointWriteExecuteLayerCloseButton").attach("click", function(e){
+		e.stop(jindo.$Event.CANCEL_DEFAULT);
+		jindo.$Element("actualPointWriteExecuteLayer").hide();
+		refreshPage();
+	});
+	
+}
+
+var oElPointWriteExecuteLayer = jindo.$Element("pointWriteExecuteLayer");
+
+if (oElPointWriteExecuteLayer != null && oElPointWriteExecuteLayer != "undefined") {
+	
+	jindo.$Element("pointWriteExecuteLayerOkButton").attach("click", function(e){
+		e.stop(jindo.$Event.CANCEL_DEFAULT);
+		jindo.$Element("pointWriteExecuteLayer").hide();
+		refreshPage();
+	});
+	
+	
+	
+	jindo.$Element("pointWriteExecuteLayerCloseButton").attach("click", function(e){
+		e.stop(jindo.$Event.CANCEL_DEFAULT);
+		jindo.$Element("pointWriteExecuteLayer").hide();
+		refreshPage();
+	});
+	
+}
+
+jindo.$Fn(function () {
+
+  function checkboxHandlerFactory(isActualYn, isLabel) {
+    return function() {
+      var actualYnChecked = jindo.$("actualYnCheckBox").checked;
+      var spoilerYnChecked = jindo.$("spoilerYnCheckBox").checked;
+
+      // convert
+      actualYnChecked = (isActualYn && isLabel)? !actualYnChecked : actualYnChecked;
+      spoilerYnChecked = (!isActualYn && isLabel)? !spoilerYnChecked : spoilerYnChecked;
+
+      location.href = "/movie/bi/mi/pointWriteFormList.nhn?code=187940&type=after&onlyActualPointYn=" + (actualYnChecked? "Y" : "N")  + "&onlySpoilerPointYn=" + (spoilerYnChecked? "Y" : "N") + "&order=sympathyScore";
+    };
+  }
+
+	
+	if (jindo.$("actualYnCheckBox") != null) {
+		jindo.$Fn(checkboxHandlerFactory(true, false), this).attach(jindo.$("actualYnCheckBox"), 'click');
+	}
+
+	if (jindo.$("actualYnLable") != null) {
+	    jindo.$Fn(checkboxHandlerFactory(true, true), this).attach(jindo.$("actualYnLable"), 'click');
+	}
+
+	
+    if (jindo.$("spoilerYnCheckBox") != null) {
+    jindo.$Fn(checkboxHandlerFactory(false, false), this).attach(jindo.$("spoilerYnCheckBox"), 'click');
+  }
+
+  if (jindo.$("spoilerYnLable") != null) {
+    jindo.$Fn(checkboxHandlerFactory(false, true), this).attach(jindo.$("spoilerYnLable"), 'click');
+  }
+	
+	
+	if (jindo.$Element("actualPointHelp") != null && jindo.$Element("actualPointHelp") != "undefined") {
+		actualPointHelpLayerToggle = function() {
+			setTimeout( function() {
+				if (document.activeElement != null) {
+					var focusedEl = jindo.$Element(document.activeElement);
+					if (focusedEl != null) {
+						if ( !focusedEl.hasClass("_actualPointHelp") ) {
+							 jindo.$Element("actualPointHelp").hide();
+						}
+					}
+				}
+			}, 100);
+		};
+
+		new jindo.LayerManager("actualPointHelp", {
+			sCheckEvent : "click",
+			nHideDelay : 0
+		}).link(jindo.$("actualPointHelp"), jindo.$("actualPointHelpButton"));
+
+		jindo.$Element("actualPointHelpButton").attach("click", function(e){
+			e.stop(jindo.$Event.CANCEL_DEFAULT);
+			jindo.$Element("actualPointHelp").toggle();
+		});
+
+		jindo.$Element("actualPointHelpCloseButton").attach("click", function(e){
+			e.stop(jindo.$Event.CANCEL_DEFAULT);
+			jindo.$Element("actualPointHelp").toggle();
+		});
+
+		
+		var waelActualPointHelp = jindo.$ElementList('._actualPointHelp');
+
+		jindo.$A(waelActualPointHelp.$value()).forEach(function(value, index, array) {
+			jindo.$Fn(actualPointHelpLayerToggle, this).attach(value, "blur");
+		});
+	}
+
+	parent.setParamForPointAfterList('N', 'sympathyScore', '1758');
+	parent.resizePointAfterListIframe(0);
+
+	// 최소 높이 270px 지정
+	var frameHeight = eval(jindo.$Document().scrollSize().height);
+
+	parent.resizePointAfterListIframe(frameHeight);
+	parent.isPointAfterListLoad = true;
+	
+	
+	
+		if (true) {
+			jindo.$("pagerTagAnchor1759").focus();
+		} else if (jindo.$("pagerTagAnchor1758") != null ){
+			jindo.$("pagerTagAnchor1758").focus();
+		}
+	
+
+  var isCheckPointExist = false;
+  // TODO: fix below condition
+  if (false) {
+    if(jindo.$Element("open-form-btn")) {
+		jindo.$Element("open-form-btn").attach("click", function(e) {
+		  	
+		  	
+			
+		  if (true && false && isCheckPointExist == false) {
+			parent.point.checkPointAfterExistAndMileageSubscriptionType();
+		  }
+		  isCheckPointExist = true;
+		  parent.openPointWriteForm();
+		});
+    }
+  } else {
+    if (jindo.$Element("open-form-btn")) {
+		jindo.$Element("open-form-btn").attach("click", function (e) {
+		  common.checkLogin(false);
+		});
+    }
+  }
+
+  var isHide = true;
+
+  if(jindo.$Element("eval-edit")) {
+    jindo.$Element("eval-edit").attach("click", function() {
+		  var edit = jindo.$Element("ly-edit");
+	  	isHide ? edit.show() : edit.hide();
+      	isHide = !isHide;
+    })
+  }
+  parent.resizePointAfterListIframeOnLoad();
+}, this).attach(this, 'load');
+
+var point = {
+		checkLoginWithMessage : function(login, loginMessage, notLoginMessage) {
+			if(login == false){
+				if(confirm(message)){
+					top.location.href="https://nid.naver.com/nidlogin.login?mode=form&url="+encodeURIComponent(top.location.href);
+				}
+				return false;
+			}
+			return true;
+		},
+
+		
+		checkAlreadyPointAfterExist : function (nid) {
+			var existPointType = "pointBefore";
+			
+			if (false == false) {
+				var oAjax = new jindo.$Ajax("/api/internal/point/pointAfterExistJson.nhn", {
+			    	onload : function (oRes) {
+			    		var resultCode = oRes.json().resultCode;
+			    		
+			    		if (resultCode == "error") {							// 서버 오류
+			    			alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+			    			return false;
+			    		} else {
+			    			existPointType = oRes.json().existPointType;
+			    			point.del(existPointType, nid);
+			    		}
+			    	},
+					timeout : 5,
+			    	onerror : function (oRes) {
+			    		alert("오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+			    		return false;
+			    	},
+			    	ontimeout : function (oRes) {
+			    		alert("처리가 지연되고 있습니다. 다시 시도해주세요.");
+			    		return false;
+			    	}
+			    });
+			    
+			    oAjax.request({
+			    	"movieCode" : "187940",
+			    	"isActualPoint" : "false"
+			    });
+			} else {
+				point.del(existPointType, nid);
+			}
+		},
+
+		del : function (existPointType, nid) {
+			if (existPointType == "actualPoint") {
+				if (confirm("관람객 평점 삭제시, 평점 작성으로 적립된 포인트는 회수됩니다. 평점을 삭제할까요?") == false) {
+					return false;
+				}
+			} else {
+				if (confirm("본인 삭제 시 복구할 수 없습니다.\n평점을 삭제하시겠습니까?") == false) {
+					return false;
+				}
+			}
+			
+			var ajaxDeleteUrl = "/api/internal/point/pointBeforeDelete.nhn";
+			if ("after" == "after") {
+				ajaxDeleteUrl = "/api/internal/point/pointAfterDelete.nhn";
+			}
+			
+			var ajax = new jindo.$Ajax(ajaxDeleteUrl, { 
+				method : "POST",
+				async : false,
+				onload : this.delCallback
+			});
+			ajax.header("ajax", "true");
+			ajax.request({
+				"nid":nid
+			});
+		},
+		
+		delCallback : function(req) {
+			var returnValue = req.text();
+			
+			if(returnValue != "success"){
+				alert(returnValue);
+				return false;
+			}
+			
+			top.location.href = '/movie/bi/mi/point.nhn?code=187940#pointAfterTab';
+			top.location.reload(true);
+		}
+};
+
+function dislplayOrder(order) {
+	var url = "/movie/bi/mi/pointWriteFormList.nhn?code=187940&type=after";
+	
+	var onlyActualPointYnValue = jindo.$("onlyActualPointYn").value;
+  	var includeSpoilerYnValue = jindo.$("includeSpoilerYn").value;
+
+	if (onlyActualPointYnValue != "") {
+		url = url + "&onlyActualPointYn=" + onlyActualPointYnValue;
+	}
+
+	if (includeSpoilerYnValue != "") {
+      url = url + "&onlySpoilerPointYn=" + includeSpoilerYnValue;
+    }
+	
+	url = url + "&order=" + order;
+	
+	location.href = document.location.protocol + "//" + document.domain + url;
+}
+
+function showPointListByNid(nid, target){
+	if (target == 'after') {
+		top.location.href = top.location.protocol + "//" + top.location.hostname + "/movie/point/af/list.nhn?st=nickname&target=after&sword="+nid;
+	} else {
+		top.location.href = top.location.protocol + "//" + top.location.hostname + "/movie/point/af/list.nhn?st=nickname_before&target=before&sword="+nid;
+	}
+}
+
+function refreshPage() {
+	 
+	top.location.href = '/movie/bi/mi/point.nhn?code=187940#pointAfterTab';
+}
+
+// 스포일러 감상평 내용 보기
+function showMovieReview(rvwIdx) {
+    jindo.$Element('_text_spo_' + rvwIdx).css('display', 'none');
+    jindo.$Element('_filtered_ment_' + rvwIdx).css('display', 'block');
+    parent.resizePointAfterListIframeOnLoad();
+}
+
+// 감상평 펼쳐보기
+function unfoldPointMent(obj) {
+    var fullMent = jindo.$Element(obj).attr("data-src");
+    jindo.$Element(obj).parent().html(fullMent);
+    parent.resizePointAfterListIframeOnLoad();
+}
+
+
+</script>
+
+
+<script type="text/javascript">
+	var sympathy = new Sympathy("187940", "after");
+</script>
+	
+	
+		<script type="text/javascript">
+            jindo.$Fn(function() {
+                try{ lcs_do(); } catch(e){}
+            }).attach(window, "pageshow");
+		</script>
+	
+</body>
+</html>
