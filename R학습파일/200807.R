@@ -225,22 +225,327 @@ View(aa)
 review_order <- head(sort(table(aa),decreasing = T),30)
 review_order
 
-#댓글 부대의 제거 /첫 영화가 나온 날 제거/ 10점 제거/좋아요가 1000이상 제거/같은 아이디가 3회이상 댓글시 제거
-v <- review_df %>% filter(n<=2) %>% filter(score != 10) %>%  filter(date >"2019.12.27 00:00") %>% filter(like <1000) %>% select(id, date, score,like)
-v
+barplot(review_order)
 
+#빈도가 높다?? 이렇다고 과연 댓글 알바라고 할 수 있을까??!?!?
 
+#평점의 분포를 알아보
 
+library(stringr)
+library()
+idx <- which(str_detect(aa$리뷰,'알바'))
+aa_alba <- aa[idx,]
+str(aa_alba)
+aa_alba[aa_alba$평점 == 1,3]
+aa_alba[aa_alba$평점 == 10,3]
+table(aa[idx,]$평점)
+which(aa[idx,]$평점 ==1)
 
+idx_temp <- which(aa[idx,]$평점 == 1)
+idx_temp
 
+##############################################강사님###########################
+library(rvest)
 
+library(stringr)
 
+​
 
+# 1. main url
 
+​
 
+main_url <- "https://movie.naver.com/movie/bi/mi/pointWriteFormList.nhn?code=181381&type=after&isActualPointWriteExecute=false&isMileageSubscriptionAlready=false&isMileageSubscriptionReject=false&page="
 
+​
 
+# 2. crawling(loop)
 
+​
+
+# 페이지수 확인
+
+​
+
+download.file(main_url, destfile = 'review_page.html', quiet = T)
+
+review_page <- read_html('review_page.html')
+
+page_num <- review_page %>% html_node('.score_total') %>% html_text('em')
+
+page_num1 <- gsub("\r|\n|\t|[가-힣]+","",page_num)
+
+page_num2 <- as.numeric(gsub(" +|,","",page_num1))
+
+page_num3 <- ceiling(page_num2/10)
+
+page_num3
+
+​
+
+score_list <- c()
+
+review_list <- c()
+
+reviewer_list <- c()
+
+date_list <- c()
+
+posi_list <- c()
+
+nega_list <- c()
+
+for(page in 1:page_num3){
+  
+  url <- paste0(main_url,page,"")
+  
+  filename <- sprintf('review(%d).html',page)
+  
+  download.file(url, destfile = filename, quiet = T)
+  
+  review_temp <- read_html(filename)
+  
+  filename
+  
+  # 평점
+  
+  score <- review_temp %>% html_nodes('.score_result') %>% html_nodes('.star_score') %>% html_text()
+  
+  score1 <- gsub("\r|\n|\t","",score)
+  
+  score_list <- append(score_list, score1)
+  
+  ​
+  
+  # 리뷰
+  
+  review <- review_temp %>% html_nodes('.score_result') %>% html_nodes('.score_reple') %>% html_node('p') %>% html_text()
+  
+  review1 <- gsub("\r|\n|\t","",review)
+  
+  review_list <- append(review_list, review1)
+  
+  ​
+  
+  # 게시자 / 게시일
+  
+  reviewer <- review_temp %>% html_nodes('.score_result') %>% html_nodes('.score_reple') %>% html_node('dt') %>% html_text()
+  
+  reviewer1 <- gsub("\r|\n|\t","",reviewer)
+  
+  # reviewer_list <- append(reviewer_list, reviewer1)
+  
+  ​
+  
+  # date11 <- substr(reviewer1,str_locate(reviewer1, "20")[,1],str_length(reviewer1))
+  
+  date11 <- substr(reviewer1,str_length(reviewer1)-15,str_length(reviewer1))
+  
+  date_list <- append(date_list,date11)
+  
+  ​
+  
+  reviewer_only <- character()
+  
+  ​
+  
+  for(i in 1:length(date11)){
+    
+    reviewer_only[i] <- gsub(date11[i],"",reviewer1[i])
+    
+  }
+  
+  ​
+  
+  reviewer_list <- append(reviewer_list, reviewer_only)
+  
+  ​
+  
+  # 공감 / 비공감
+  
+  posi_nega <- review_temp %>% html_nodes('.score_result') %>% html_nodes('.btn_area') %>% html_text()
+  
+  posi_nega1 <- gsub("\r|\n|\t","",posi_nega)
+  
+  posi <- str_extract(posi_nega1,'[0-9]{1,}')
+  
+  posi_list <- append(posi_list,posi)
+  
+  nega <- str_extract(posi_nega1,'[0-9]{1,}$')
+  
+  nega_list <- append(nega_list,nega)
+  
+  ​
+  
+  cat('남은 페이지는',page_num3-page,'\n')
+  
+  ​
+  
+}
+
+​
+
+### 3. create dataframe
+
+​
+
+review_df <- data.frame(reviewer = reviewer_list,score=score_list,review=review_list,
+                        
+                        like=posi_list,dislike=nega_list,date=date_list)
+
+​
+
+library(tibble)
+
+review_tb <- as_tibble(review_df)
+
+​
+
+head(review_df,4)
+
+str(review_tb)
+
+​
+
+# 데이터 저장
+
+write.csv(review_df, 'D:\\rwork\\05ex\\06review\\review.csv', row.names = F)
+
+​
+
+### 형변환
+
+​
+
+review_tb$date <- strptime(review_tb$date,'%Y.%m.%d %H:%M')
+
+str(review_tb)
+
+review_tb$date[1]
+
+review_df$date[1]
+
+​
+
+####################################################
+
+​
+
+review_tb <- read.csv(file = "D:\\lec_mat\\01_analysis\\R\\05ex\\06review\\review.csv",
+                      
+                      header = T, stringsAsFactors = F)
+
+​
+
+​
+
+##### analysis #####
+
+​
+
+# 1. 평점 분포
+
+​
+
+tb <- review_tb
+
+​
+
+tb$score <- as.numeric(tb$score)
+
+table(tb$score)
+
+​
+
+barplot(table(tb$score))
+
+​
+
+# 2. 동일 게시자? --> 의심 가능
+
+​
+
+a <- head(sort(table(tb$reviewer),decreasing = T),20)
+
+a
+
+​
+
+tb[tb$reviewer=='love****',]
+
+​
+
+tb[tb$reviewer=='사바자다라안무(vast****)',]
+
+​
+
+tb[tb$reviewer=='김소정(ksjm****)',]
+
+​
+
+tb[tb$reviewer=='rlaw****',]
+
+​
+
+a_t <- head(sort(table(tb$reviewer),decreasing = T),20)[1]
+
+a_t
+
+​
+
+table(df_test$date)
+
+​
+
+# 3. 평점 1점 중 공감 최다?
+
+​
+
+tb$like <- as.numeric(tb$like)
+
+tb$dislikelike <- as.numeric(tb$dislike)
+
+index1 <- order(tb[tb$score==1,]$like,decreasing = T)
+
+​
+
+tb[tb$score==1,][index1,][1:4,]
+
+​
+
+# 4. '알바'를 언급한 댓글 조사 
+
+​
+
+tb <- read.csv(file = 'D:\\rwork\\05ex\\06review\\review.csv', 
+               
+               header = TRUE, sep = ",")
+
+str(tb)
+
+library(stringr)
+
+idx <- which(str_detect(tb$review,'알바'))
+
+tb_alba <- tb[idx,]
+
+str(tb_alba)
+
+tb_alba[tb_alba$score == 1,3]
+
+tb_alba[tb_alba$score == 10,3]
+
+table(tb[idx,]$score)
+
+which(tb[idx,]$score == 1)
+
+​
+
+​
+
+idx_temp <- which(tb[idx,]$score == 1)
+
+idx_temp
 
 
 
