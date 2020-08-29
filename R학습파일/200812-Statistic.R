@@ -297,20 +297,3 @@ p-val이 유의수준보다 작으므로 귀무가설 기각
 
 #####z카이제곱검정 설명 url
 https://bioinformaticsandme.tistory.com/139
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

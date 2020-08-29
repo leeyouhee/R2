@@ -452,14 +452,3 @@ plot(hosing55,which=2)
 plot(hosing55,which=3)
 plot(hosing55,which=4)
 ##
-
-
-
-
-
-
-
-
-
-
-
