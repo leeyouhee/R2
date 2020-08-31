@@ -438,25 +438,303 @@ p-val : 6.901e-12
 p-val이 유의수준보다 작으므로 귀무가설 기각
 즉, 직업유형에 따른 응답 정도에 차이가 있다.
 
+################################################################8월13일
++모형이 통계적으로 유의미한가 -> 유의수준 5%이하에서 검정통계량 p-value가 0.05보다 작으면
++회귀계수들이 유의미한가 -> 해당 계수의 t통계량과 p-value로 파악
++모형이 얼마나 설명력을 갖는가 -> 결정계수 r^2값 확인
++잔차분석 5가지 가정을 만족하는가
+  1) 선형성(독립변수의 변화에 따라 종속변수도 일정 크기로 변화)
+  2) 독립성(잔차와 설명번수의 값이 독립적)
+  3) 등분산성(설명변수의 모든 값에 대해 오차들의 분산이 일정)
+  4) 비상관성(관측치들의 잔차들끼리 상관성이 없어야 한다.)
+  5) 정상성(잔차항이 정규분포를 이뤄야 한다.)
 
++오차는 과정 속에 있는 추정값과 차이
++잔차는 선형그래프이 최종결정 후의 오차를 잔차라고 부른다.
 
+상관분석 : 데이터 안의 변수 간의 관계를 알기 위해 수행
+1.Pearson 상관계수
+  -비율척도 또는 등간척도 변수들의 상관성 확인
+  -해석 : 산점도가 직선에 가깝게 분포하면 상관계수의 절대값이 1에 가까워짐
+          반면에 산점도가 넓게 퍼져있다면, 즉 직선의 관계가 희미할수록 상관계수는 0에 가까워짐
 
+install.packages('acepack')
+install.packages('Hmisc')
+library(Hmisc)
+library(dplyr)
 
+#상관분석 수행 과정
+drat <- mtcars$drat
+disp <- mtcars$disp
 
+str(drat)
+str(disp)
 
+mtcars %>%  head
+mtcars %>%  str
 
+Hmisc::rcorr(as.matrix(mtcars), type = 'pearson')
+###rcorr은 "H0 : 상관계수는 0이다"에 대한 p-value를 보여줌
 
+#공분산
+cov(mtcars)
 
+#corrgram
+install.packages('corrgram')
+library(corrgram)
+corrgram(as.matrix(mtcars),upper.panel = panel.conf)
 
+#Chickweight data
+library(MASS)
 
+#1단계
+chick <- ChickWeight
+head(chick)
+#2단계 subsetting
+ch1 <- chick %>%  filter(Diet == 1 & Chick == 1)
+ch1
+#3단계 simple linear regression
+ch.lm <- lm(formula = weight~Time,data = ch1)
+summary(ch.lm)
 
+#4단계 해석
+F통계량의 p-value 2.0~~~e-0.8으로 유의수준 0.05기준 매우낮아 모형은 통계적으로 유으ㅟ하다.
+설명변수 Time의 t통계량에 대한 p-value 2.97e-09으로 회귀계수 역시 통계적으로 유의하다
+결정계수 r^2 0.9588로 1에 매우 가까우며, 모형의 설명력이 매우강함
 
+#절편을 제거하는 회구식
+ch.nointer <- lm(weight ~ -1 + Time,data = ch1)
 
+#prodcut파일 불러오기
+pro <- read.csv('./data/product.csv')
+str(pro)
 
+y <- pro$제품_만족도
 
+x <- pro$제품_적절성
+df <- data.frame(x,y)
+str(df)
+#회귀모델 생성
+result.lm <- lm(y~x,data = df)
+#회귀분석의 절편과 기울기
+result.lm # 회귀계수
+#모델의 적합값과 잔차 보기
+names(result.lm)
+fitted.values(result.lm)
+fitted.values(result.lm)[1:2]
+head(df,1) #X =4 ,Y = 3
+Y = 0.7789 + 0.7393 * 4
+Y
 
+#모델의 잔차 뽑아내기
+fitted.values(result.lm)[1:2]
+result.lm[1:2]
+residuals(result.lm)[1:2]
 
+#실습
+1)선형회귀 분석 모델 시각화
+plot(y~x,data = df)
+2)회귀분석
+result.lm <- lm(y~x,data = df)
+3)회귀선
+abline(result.lm, col='red')
+4)분석 결과 보기
+summary(result.lm)
+str(summary(result.lm))
+plot(summary(result.lm)$residuals)
 
+#2. 다중회귀분석
++여러개의 독립변수가 종속변수에 미치는 영향 분석
+H1 : 음료수 제품의 적절성(x1)과 친밀도(x2)는 제품 만족도(y)에 영향을 미친다.
+
+prod <- read.csv('./data/product.csv',header = T)
+
+y <- prod$제품_만족도
+x1 <- prod$제품_적절성
+x2 <- prod$제품_친밀도
+df <- data.frame(x1,x2,y)
+View(df)
+
+re.lm <- lm(y~x1+x2,data = df)
+
+#계수확인
+re.lm #y절편 0.66731 
+summary(re.lm)
+
+#분산팽창 요인
+install.packages('car') #vif() 패키지 설치
+library(car)
+
+#다중공선성 확인
++통계학의 회귀분석에서 독립변수들 간에 강한 상관관계가 나타나는 문제이다.
+vif(re.lm) #통상적으로 4보다 크면 문제가 있다고 판단
+sqrt(vif(re.lm)) >2 #문제 없음 / 모델을 사용해도 되는 지에 대한 고민 루트를 씌었기때문에 2보다 크면 문제 있음 
+
+#[실습]
+data(iris)
+
+1) 회귀 모델 생성
+form <- iris$Sepal.Length~Sepal.Width+Petal.Length
+model <- lm(form,data=iris)
+model
+summary(model)
+
+2) 잔차 분석 -> 더비왓슨(자기 상관성)
+install.packages('lmtest')
+library(lmtest)
+dwtest(model) #더빈왓슨값(통상 1~3사이) ;귀무가설 : 자기상관은 없다.
+
+3)잔차도 확인 검정
+par(mfrow=c(2,2))
+
+3-1)선형성(빨간 실선이 -에 가까운 수평선) &독립성(특정한 모여있는 패턴이 발견되지 않음)
+plot(model, which = 1)
+3-2)정규성(직선에 가깝게 잘 모여있음)
+plot(model, which = 2)
+3-3)등분산성 &독립성(적절하게 퍼져 있음, 특정패턴없음)
+plot(model, which =3)
+3-4)극단치
+plot(model, which = 4)
+
+4)잔차 정규성 검정
+attributes(model)  #coefficients(계수), residual(잔차), fitted.values(적합값)
+res <- model$residuals
+shapiro.test(model$residuals) #W = 0.99394, p-value = 0.7856 >= 0.05
+                              #귀무가설 : 정규성과 차이가 없다.
+5)정규성 시각화
+head(res,20)
+length(res)
+hist(model$residuals,freq = F,ylim=c(0,1.4));lines(density(model$residuals))
+qqnorm(model$residuals)
+plot(model,2)
+
+#다중공선성 검사 예시
+x1 <- c(7,1,11,11,7,11,3,1,2,21,1,11,10)
+x2 <- c(26,29,56,31,52,55,71,31,54,47,40,66,68)
+x3 <- c(6,15,8,8,6,9,17,22,18,4,23,9,8)
+x4 <- c(60,52,20,47,33,22,6,44,22,26,34,12,12)
+y <- c(78.5,74.3,104.3,87.6,95.9,109.2,102.7,72.5,93.1,115.9,83.8,113.3,109.4)
+
+df <- data.frame(x1,x2,x3,x4,y)
+a <- lm(y~.,data=df)
+str(df)
+summary(a)
+
+a1 <- lm(y~x1+x2+x4,data=df)
+summary(a1)
+
+a2 <- lm(y~x1+x3, data = df)
+summary(a2)
+
+aa <- step(lm(y~x1+x2+x3+x4, data = df), 
+           scope = list(lower=~1, upper = ~x1+x2+x3+x4)) #자동으로 변수를 소거
+summary(aa)
+aa
+
+install.packages('mlbench')
+library(mlbench)
+data("BostonHousing2")
+head(BostonHousing2)
+housing <- lm(medv~.,data=BostonHousing2)
+summary(housing)#summary 결과 indus, age 는  p 값이 매우 높아 유효하지 않은 변수로 판단되나,
+                #변수를 그대로 유지한채, 소거법 적용
+ho1 <- step(housing,direction = c('both'))
+ho1
+summary(ho1)#소거법 결과 : 3번째 스텝에서 indus와 age를 제외한 결과 확인 가능.
+            #housing2에 미리 indus 와 age를 제외하고 회구한 결과,
+            #첫번째 스텝에서 종료되며, housing1의 결과와 일치한다.
+ho2 <- lm(medv~crim+zn+chas+nox+rm+dis+rad+ptratio+b+lstat+tax,data = BostonHousing2)
+ho3 <- step(ho2,direction = 'both')
+
+###############################################################################
+#연습문제 1
+1. HDTV 판매율을 높이기 위해 프로모션 진행한 결과 기존 구매비율 15% 보다 
+향상되었는가? (data : hdtv.csv)
+hdtv <- read.csv('./data/hdtv.csv',header = T)
+head(hdtv)
+summary(hdtv)
+hdtv$buy2[hdtv$buy == 1] <- 'no'
+hdtv$buy2[hdtv$buy == 2] <- 'yes'
+hdtv$buy2
+table(hdtv$buy2)
+
+#이항분포 비율검정 :
+50명의 고객을 대상으로 프로모션 후 15% 구매비율이 향상되었는지를 검정
+install.packages('prettyR')
+library(prettyR)
+freq(hdtv$buy2)
+binom.test(c(10,40),p=0.15)
+#해석
+p-val > 0.05 이므로 '프로모션 후 15%'구매비율의 향상은 없었다.
+귀무가설을 채택한다
+###############################################################################
+#연습문제2
+우리나라 전체 중학교 2학년 여학생 평균키가 148.5cm이다. A 중학교 2학년 전체 500명 중
+10%인 50명을 선정하여 평균신장을 계산하고 평균 신장에 차이가 있는지 규명(data : student_height.csv)
+
+sth <- read.csv('./data/student_height.csv', header = T)
+head(sth)
+summary(sth) #결측치 확인
+height <-sth$height
+mean(height)
+
+1)정규분포 검정
+shapiro.test(height)
+hist(height)
+qqnorm(height)
+qqline(height,lty=1,col='red')
+#W = 0.88711, p-value = 0.0001853 < 0.05이므로 정규분포를 따르지 않는다.
+#H0 : 정규분포를 따른다.
+wilcox.test(height, mu = 148.5,alternative = 'two.sided',conf.level = 0.95)
+#해석
+#H0 : 평균키의 차이는 없다.
+p-value > 0.05이므로 표본의 평균이 한국 중학교 2학년 여학생 평균 신장 크기와
+차이가 없다는 귀무가설을 채택한다.
+
+###############################################################################
+#연습문제3
+3. 대학 진학한 남학생과 여학생 대상으로 학교에 대한 만족도에 차이가 있는지 검정(data : sample.csv)
+성별 1: 남 ,2;여 survey 0 : 불만족, 1 : 만족
+
+sur <- read.csv('./data/sample.csv',header = T)
+head(sur)
+summary(sur)
+x <- sur$gender
+y <- sur$survey
+table(x)
+table(y)
+table(x,y)
+
+#비율차이검정
+prop.test(c(138,107),c(174,126),
+          alternative = 'two.sided',conf.level = 0.95)
+#해석
+p-value > 0.05이므로 귀무가설을 채택한다. 즉, 만족도에는 차이가 없다.
+
+##############################################################################
+#연습문제4
+4. 두가지 다른 교육방법에 대한 시험성적에 차이가 있는지 검정(method.csv)
+met <- read.csv('./data/method.csv',header = T)
+head(met)
+summary(met)
+met1 <- subset(met,!is.na(score),c(method,score))
+summary(met1)
+
+a <- subset(met1,method ==1)
+b <- subset(met1,method == 2)
+a1 <- a$score
+b1 <- b$score
+
+length(a1)
+length(b1)
+mean(a1)
+mean(b1)
+var.test(a1,b1) #동분산성 검정
+t.test(a1,b1,alternative = 'two.sided',conf.level = 0.95)
+
+#해석
+p-value=1.303e-06 < 0.05이므로 귀무가설을 기각한다. 즉, 교육방법에 대한 시험성적에
+차이가 있다.
 
 
 
