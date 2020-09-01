@@ -736,7 +736,173 @@ t.test(a1,b1,alternative = 'two.sided',conf.level = 0.95)
 p-value=1.303e-06 < 0.05이므로 귀무가설을 기각한다. 즉, 교육방법에 대한 시험성적에
 차이가 있다.
 
+#######################################################################8월14일
 
+#1.지도학습(Supervised Learning)
+
+1)데이터 불러오기
+weather <- read.csv('./data/weather.csv',stringsAsFactors = F)
+summary(weather)
+
+2)결측치 제거
+weather <- na.omit(weather)
+summary(weather)
+dim(weather)
+head(weather,1)
+str(weather)
+
+3)chr 컬럼 제거(RainTomorrow 제외)
+weather_df <- weather[,c(-1,-6,-8,-14)]
+str(weather_df)
+head(weather_df,2)
+
+4)RainTomorrow 칼럼 변환 ; 로지스틱 회귀분석위해 라벨화
+weather_df$RainTomorrow[weather_df$RainTomorrow == 'Yes'] <- 1
+weather_df$RainTomorrow[weather_df$RainTomorrow == 'No'] <- 0
+str(weather_df)
+weather_df$RainTomorrow <- as.numeric(weather_df$RainTomorrow)
+table(weather_df$RainTomorrow)
+
+5)데이터 분할
+idx <- sample(1:nrow(weather_df),nrow(weather_df)*0.7)
+nrow(weather_df)
+length(idx)
+
+train <- weather_df[idx,]
+test <- weather_df[-idx,]
+nrow(test)
+
+6)모델 생성 ; train 데이터로 사용
+wmodel <- glm(RainTomorrow~.,data=train,family = 'binomial')
+str(wmodel)
+summary(wmodel)
+
+7) 변수선택
+step1 <- step(object = wmodel,trace = F,direction = 'backward')
+step1
+summary(step1)
+
+8)새로운 데이터로 예측, #type ='response' : 0~1 확률값으로 예측
+pred <- predict(wmodel,newdata = test, type='response')
+pred
+summary(pred)
+
+9)예측결과 분류 및 정확도 확인
+result_pred <- ifelse(pred >=0.5,1,0)
+result_pred
+table(result_pred,test$RainTomorrow)
+
+8-1)
+pred_step <- predict(step1, newdata = test, type = 'response')
+pred_step
+summary(pred_step)
+
+9-1)
+result_preds <-ifelse(pred_step>=0.5,1,0)
+result_preds
+table(result_preds, test$RainTomorrow)
+
+#######################################################################
+#연습문제1.
+종속변수의 범주가 2개로 하기 위해 iris 데이터의 일부부만 이용
+종속변수는 setosa,versicolor 2개로 이항분류 적용
+독립변수는 Sepal.length만 이용
+
+1)데이터 로딩 및 subsetting
+data(iris)
+head(iris,3)
+ir <- subset(iris,Species == 'setosa'|Species=='versicolor')
+table(ir$Species)
+
+2)factor로 변경
+ir$Species <- as.factor(ir$Species)
+str(ir$Species)
+table(ir$Species)
+
+3)glm 함수로 모델 생성
+irmodel <- glm(Species~Sepal.Length,data=ir,family = 'binomial')
+
+4)적합된 모델 요약 정보
+summary(irmodel)
+str(summary(irmodel))
+
+5)적합결과 보기
+head(ir$Sepal.Length)
+options(scipen = 100) #숫자표시형식 지정
+fitted(irmodel)[c(1:5,100)] #predict와 같은 함수
+
+6)predict 위해 편의상 모형 구축에 사용된 데이터 1, 50,51,100 사용
+newdata <- ir[c(1,50,51,100),]
+
+7)예측 실시
+predir <- predict(irmodel,newdata = newdata,type = 'response')
+
+8)0.5보다 작으면 setosa, 크면 versicolor로 코딩
+
+result <- as.factor(ifelse(predir <= 0.5,'setosa','versicolor'))
+
+8)정확도 확인
+d <- newdata[,5]
+d
+table(d,result)
+# install.packages('caret') #confusionmatrix
+# install.packages('e1071')
+# library(caret)
+# library(e1071)
+confusionMatrix(as.factor(d),as.factor(result))
+str(d)
+str(result)
+
+10)데이터 분할하여 모델 적합 및 예측 실시
+idx <- createDataPartition(ir$Species,p=0.7,list = F) #factor별로 균등하게 샘플링
+tra <- ir[idx,]
+tes <- ir[-idx,]
+length(ir$Species);length(tra$Species);length(tes$Species)
+
+bb <- glm(Species~Sepal.Length,family='binomial',data=tra)
+summary(bb)
+cc <- predict(bb,newdata=tes,type='response')
+cc
+
+11)0.5보다 작으면 setosa, 아니면 versicolor
+res1 <- ifelse(cc<=0.5,'setosa','versicolor')
+
+12)정확도 비교
+dd <- tes[,5]
+dd <- as.character(dd)
+dd <- as.factor(dd)
+table(dd,res1)
+pairs(iris)
+caret::confusionMatrix(dd, as.factor(res1))
+
+#연습문제 2
+1)데이터 준비
+mt <- mtcars
+nrow(mt)
+
+2)데이터분할
+idx <- sample(1:nrow(mt),nrow(mt)*0.8)
+mt_tr <- mt[idx,]
+mt_te <- mt[-idx,]
+head(mt_tr)
+
+3)종속변수 vs, 독립변수(mpg,am)
+mt_model <- glm(vs~mpg+am,family = 'binomial',data=mt_tr)
+
+summary(mt_model)
+mt_model$fitted.values
+
+4)예측
+mt_pred <- predict(mt_model,newdata=mt_te,type='response')
+
+5)변수 선택
+mt_step <- step(mt_model,direction = 'backward')
+
+6)결과 보기
+mt_model
+mt_model.result <- ifelse(mt_pred <= 0.5, 0, 1)
+table(mt_te$vs,mt_model.result)
+data.frame(orig = mt_te$vs, pred = mt_model.result)
 
 
 
